@@ -1,4 +1,6 @@
 EshaYammer::Application.routes.draw do
+  resources :comments
+
   resources :posts
 
   as :user do

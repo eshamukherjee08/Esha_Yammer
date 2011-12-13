@@ -1,3 +1,5 @@
+
+<p id="notice"><%= notice %></p>
 <h1>Listing posts</h1>
 
 <table>
@@ -9,8 +11,7 @@
 
 <% @posts.each do |post| %>
   <tr>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= post.content %></td>
     <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -18,4 +19,4 @@
 
 <br />
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'Back', root_path %>

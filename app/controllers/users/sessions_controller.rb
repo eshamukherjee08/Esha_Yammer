@@ -6,7 +6,7 @@ class Users::SessionsController < Devise::SessionsController
     if current_user.admin?
       root_path
     else
-      users_path
+      user_path(current_user.id)
     end
   end
 

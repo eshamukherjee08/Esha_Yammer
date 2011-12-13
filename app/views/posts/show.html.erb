@@ -1,5 +1,32 @@
 <p id="notice"><%= notice %></p>
+<h3>Content</h3>
+  <%= sanitize(@post.content) %>
+  <%= form_for(@comment) do |f| %>
+    <% if @comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
+        <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= hidden_field :post, :id %>
+    <div class="field">
+      <%= f.label :comment %><br />
+      <%= f.text_area :comment, :rows => 5, :cols => 80 %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+  
+  <% @post.comments.each do |com| %>
+    <div id="comment_b">
+      <div id="comment_c"><%= com.comment%></div><br />
+    </div><br />
+  <% end %>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', user_path(@user) %>

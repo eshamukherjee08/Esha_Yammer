@@ -3,7 +3,9 @@
   <% if current_user.admin? %>
     Hello!!!
     <br /><h3>ADD NEW USER</h3>
-    <%= link_to 'Invite User', new_user_invitation_path %>
+    <%= link_to 'Invite User', new_user_invitation_path %><br />
+    <%= link_to 'View all Users', users_path %><br />
+    <%= link_to 'View all Posts', posts_path %><br />
   <% end %>
   <br /><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
 <% else %>
