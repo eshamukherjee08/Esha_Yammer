@@ -6,6 +6,11 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'devise'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'acts_as_commentable'
+gem 'jquery-rails', '1.0.18'
+gem 'devise_invitable'
 
 # Use unicorn as the web server
 # gem 'unicorn'

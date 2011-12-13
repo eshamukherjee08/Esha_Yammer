@@ -1,4 +1,14 @@
 EshaYammer::Application.routes.draw do
+  resources :posts
+
+  as :user do
+      match '/user/confirmation' => 'confirmations#update', :via => :put, :as => :update_user_confirmation
+  end
+  devise_for :users, :controllers => { :confirmations => "confirmations", :sessions => 'users/sessions', :invitations => 'users/invitations' }
+  
+  resources :users
+  
+  #get 'user_home/index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +58,7 @@ EshaYammer::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
