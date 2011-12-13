@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213123358) do
+ActiveRecord::Schema.define(:version => 20111213134138) do
 
   create_table "comments", :force => true do |t|
     t.string   "comment",                        :default => ""
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(:version => 20111213123358) do
 
   add_index "comments", ["user_id"], :name => "fk_comments_user"
 
-  create_table "followers", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "followers", :id => false, :force => true do |t|
+    t.integer "follower_id"
+    t.integer "followee_id"
   end
 
   create_table "posts", :force => true do |t|
@@ -32,6 +32,10 @@ ActiveRecord::Schema.define(:version => 20111213123358) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "post_pic_file_name"
+    t.string   "post_pic_content_type"
+    t.integer  "post_pic_file_size"
+    t.datetime "post_pic_updated_at"
   end
 
   create_table "users", :force => true do |t|

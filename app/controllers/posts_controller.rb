@@ -32,6 +32,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
+    p "**************"
+    p params[:post]
     @post = Post.new(params[:post].merge!({ :user_id => current_user.id }))
     respond_to do |format|
       if @post.save

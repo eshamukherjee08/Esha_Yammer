@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 <h3>Content</h3>
   <%= sanitize(@post.content) %>
+  <% if @post.post_pic? %>
+    <%= image_tag @post.post_pic.url(:thumb)%>
+  <% end %>
   <%= form_for(@comment) do |f| %>
     <% if @comment.errors.any? %>
       <div id="error_explanation">
