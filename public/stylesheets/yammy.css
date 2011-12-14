@@ -1,0 +1,40 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+#links
+{
+  display: inline;
+  float:right;
+  font: small-caps 15px/25px "Times New Roman", serif;
+  margin-right:20px;
+}
+#banner {
+  background-color: black;
+  height: 80px;
+  padding:10px;
+  text-align: center;
+  color: maroon;
+  text-shadow: 0.2em 0.2em 0.2em white;
+  font: small-caps 30px/40px "Times New Roman", serif;
+}
+
+#p_img {
+  display:inline;
+  float:left;
+  margin-left:20px;
+}
+
+#welcome {
+  display:inline;
+}
+
+#posts {
+  border: 3px black;
+  margin-left:20px;
+}
+
+#form {
+  border: 3px black;
+}

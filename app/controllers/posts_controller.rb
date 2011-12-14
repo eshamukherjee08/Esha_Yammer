@@ -1,73 +1,46 @@
 class PostsController < ApplicationController
-  # GET /posts
-  # GET /posts.xml
+
+  before_filter :find_post, :except =>[:new,:create,:index]
+
   def index
     @posts = Post.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @posts }
-    end
   end
 
-  # GET /posts/1
-  # GET /posts/1.xml
   def show
-    @post = Post.find(params[:id])
     @comment = Comment.new
     @user = @post.user_id
   end
 
-  # GET /posts/new
-  # GET /posts/new.xml
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
+
   def edit
-    @post = Post.find(params[:id])
   end
 
-  # POST /posts
-  # POST /posts.xml
+
   def create
-    p "**************"
-    p params[:post]
     @post = Post.new(params[:post].merge!({ :user_id => current_user.id }))
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to(user_path(current_user.id), :notice => 'Post was successfully created.') }
-      else
-        format.html { render :action => "new" }
-      end
-    end
+    @post.save
+    redirect_to(user_path(current_user.id), :notice => 'Post was successfully created.')
   end
 
-  # PUT /posts/1
-  # PUT /posts/1.xml
+
   def update
-    @post = Post.find(params[:id])
-
-    respond_to do |format|
-      if @post.update_attributes(params[:post])
-        format.html { redirect_to(@post, :notice => 'Post was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
-      end
-    end
+    @post.update_attributes(params[:post])
+    redirect_to(@post, :notice => 'Post was successfully updated.')
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.xml
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(posts_path, :notice => 'Post Deleted!') }
-    end
+    redirect_to(posts_path, :notice => 'Post Deleted!')
   end
+  
+  protected
+  
+    def find_post
+      @post = Post.where(:id => params[:id]).first
+      redirect_to root_path, :notice=> "Post not found!!!" unless @post
+    end
 end

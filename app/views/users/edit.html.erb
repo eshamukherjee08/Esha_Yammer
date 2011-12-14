@@ -6,6 +6,7 @@
   <%= f.label :name %><br />
   <%= f.text_field :name %>
 </div>
+<%= image_tag @user.avatar.url(:thumb)%>
 <div class="field">
   <%= f.file_field :avatar%>
 </div>
@@ -14,5 +15,4 @@
 </div>
 <% end %>
 
-<%= link_to 'Show', @user %> |
 <%= link_to 'Back', user_path(@user) %>

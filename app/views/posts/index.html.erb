@@ -2,20 +2,27 @@
 <p id="notice"><%= notice %></p>
 <h1>Listing posts</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @posts.each do |post| %>
-  <tr>
-    <td><%= post.content %></td>
-    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+    <h3>Post</h3>
+    <div>
+      <%= post.content %>
+      <% if post.post_pic? %>
+        <%= image_tag post.post_pic.url(:thumb)%>
+      <% end %>
+      <% if !post.comments.empty? %>
+        <h5>Comments</h5>
+        <% post.comments.each do |comment| %>
+          <div>
+            <%= comment.comment %>
+            By:<%= comment.user.name %>
+            <%= link_to 'Delete Comment', comment, :confirm => 'Are you sure?', :method => :delete %>
+          </div><br />
+        <% end %>
+      <% end %>
+      <%= link_to 'Delete Post', post, :confirm => 'Are you sure?', :method => :delete %><br />
+    </div><br />
 <% end %>
-</table>
 
 <br />
 

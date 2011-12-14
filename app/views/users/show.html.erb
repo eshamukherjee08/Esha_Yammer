@@ -1,11 +1,16 @@
 <p id="notice"><%= notice %></p>
+<div id="banner"><h1>YAMMER</h1></div>
+<div id ="links">
+  <br /><%= link_to 'My Profile', edit_user_path(@user) %> |
+  <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
+</div>
 
-<h1>Welcome User Your Page</h1>
-<p><%= current_user.email %></p>
-<%= image_tag @user.avatar.url(:thumb)%>
+<div id="p_img"><%= image_tag @user.avatar.url(:thumb)%></div>
+<div id="welcome">Welcome, <%= current_user.name %></div>
 
 
-<%= form_for(@post, :html=> {:multipart => true }) do |f| %>
+<br /><br /><br /><br />
+<span id="form"><%= form_for(@post, :html=> {:multipart => true }) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -18,28 +23,29 @@
     </div>
   <% end %>
 
-  <div class="field", style="display:inline">
-    <h3, style="display:inline"><%= f.label :content, 'Status Update' %>
+  <div class="field", style="display:inline;float:left">
+    <h3, style="display:inline"><%= f.label :content, 'Whatz on Your Mind?' %>
     <%= f.text_area :content, :rows => 1, :cols => 50 %></h3>
   </div>
-  <div class="field">
+  <div class="field", style="display:inline;float:left">
     <%= f.file_field :post_pic %>
   </div>
-  <div class="actions", style="display:inline;float:right;margin-right:850px">
+  <div class="actions", style="display:inline">
     <%= f.submit %>
   </div>
-<% end %>
-
-
-<% @posts.each do |post| %>
-  <% if post.post_pic? %>
-    <%= image_tag post.post_pic.url(:thumb)%>
+<% end %></span>
+<br /><br />
+<div id="posts">
+  <% @posts.each do |post| %>
+    <% if post.post_pic? %>
+      <%= image_tag post.post_pic.url(:thumb)%>
+    <% end %>
+    <%= sanitize(post.content) %>
+    By: <%= post.user.name %>
+    <%= link_to 'View post', post_path(post.id) %><br />
   <% end %>
-  <%= sanitize(post.content) %>
-  <%= link_to 'View post', post_path(post.id) %><br />
-<% end %>
+</div>
 
-<br /><%= link_to 'My Profile', edit_user_path(@user) %>
+<%= render :partial => "users/follow" %>
 
-<br /><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %>
 

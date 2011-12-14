@@ -1,0 +1,7 @@
+<% @users.each do |user| %>
+  <% if !user.admin? %>
+    <p><%= image_tag user.avatar.url(:thumb) %></p>
+    <p><%= user.name %></p>
+    <%= button_to "FOLLOW", follow_user_path(user.id), :method => :get %>
+  <% end %>
+<% end %>

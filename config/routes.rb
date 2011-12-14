@@ -8,7 +8,11 @@ EshaYammer::Application.routes.draw do
   end
   devise_for :users, :controllers => { :confirmations => "confirmations", :sessions => 'users/sessions', :invitations => 'users/invitations' }
   
-  resources :users
+  resources :users do
+    member do
+      get 'follow'
+    end
+  end
   
   #get 'user_home/index'
   # The priority is based upon order of creation:
